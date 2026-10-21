@@ -31,7 +31,7 @@ env:
 
 jobs:
   build:
-    name: Build R66S immortalwrt v25.12.1
+    name: Build X86 immortalwrt v25.12.2
     runs-on: ubuntu-22.04
 
     steps:
@@ -60,7 +60,7 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
         git tag
-        git checkout v25.12.1
+        git checkout v25.12.2
 
     - name: Load custom feeds
       run: |
