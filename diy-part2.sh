@@ -18,14 +18,8 @@ sed -i 's/luci-theme-bootstrap/luci-theme-aurora/g' feeds/luci/collections/luci/
 
 # Modify hostname
 #sed -i 's/ImmortalWrt/FastRhino/g' package/base-files/files/bin/config_generate
-# 调换LAN WAN （ImmortalWrt P3TERX Actions，x86双网卡）
-mkdir -p $WORK_PATH/files/etc/uci-defaults
-cat > $WORK_PATH/files/etc/uci-defaults/99-swap-lan-wan <<'EOF'
-#!/bin/sh
-uci set network.lan.device='eth1'
+# 调换LAN WAN（DSA x86）
 uci set network.wan.device='eth0'
 uci set network.wan6.device='eth0'
+uci set network.@device[0].ports='eth1'
 uci commit network
-exit 0
-EOF
-
