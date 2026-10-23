@@ -18,8 +18,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-aurora/g' feeds/luci/collections/luci/
 
 # Modify hostname
 #sed -i 's/ImmortalWrt/FastRhino/g' package/base-files/files/bin/config_generate
-# 调换LAN WAN（DSA x86）
-uci set network.wan.device='eth0'
-uci set network.wan6.device='eth0'
-uci set network.@device[0].ports='eth1'
-uci commit network
+# x86 ImmortalWrt 互换LAN WAN eth0<->eth1
+cat > $BUILD_DIR/package/base-files/files/etc/board.d/02_network <<'EOF'
+ucidef_set_interfaces_lan_wan "eth1" "eth0"
+EOF
